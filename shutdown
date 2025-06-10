@@ -1,0 +1,14 @@
+#!/bin/sh
+
+OS=$(uname)
+
+if [ "$OS" = "Linux" ] || [ "$OS" = "Darwin" ]; then
+  echo "🛑 Detected Unix-like OS ($OS)"
+  ./shutdown.sh
+elif echo "$OS" | grep -qiE "MINGW|CYGWIN|MSYS"; then
+  echo "🛑 Detected Windows-like shell ($OS)"
+  ./shutdown.bat
+else
+  echo "❌ Unsupported OS: $OS"
+  exit 1
+fi
